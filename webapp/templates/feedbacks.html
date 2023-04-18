@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Talesword: Отзывы
+{% endblock %}
+
+{% block body %}
+<a class="btn btn-primary" href="/feedback_form" role="button">
+	Написать/Изменить отзыв
+</a>
+<h2>Отзывы пользователей</h2>
+{% for item in items %}
+	{% if item.feedbacks[0] %}
+        <div>
+        	<h4>Пользователь {{ item.login }}</h4>
+			{{ item.feedbacks[0].text }}
+        </div>
+	{% endif %}
+{% endfor %}
+{% endblock %}
