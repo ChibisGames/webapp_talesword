@@ -6,5 +6,8 @@ Talesword Updates
 
 {% block body %}
 <h1>Последние обновления</h1>
-<p> {{ updates }} </p>
+{% for update in updates %}
+      <p> {{ update }} </p>
+{% endfor %}
+
 {% endblock %}
