@@ -12,14 +12,13 @@ from webapp.models import Feedback, User
 def updates_page():
     with open('webapp/static/text/updates.txt', 'r', encoding="utf-8") as f:
         updates_data = list(map(str.strip, f.readlines()))
-    print(updates_data)
     return render_template('index.html', updates=updates_data)
 
 
 @app.route('/feedbacks', methods=['GET'])
 def feedbacks_page():
     return render_template('feedbacks.html',
-                           items=User.query.filter(Feedback.id > 0).all())
+                           items=User.query.filter(Feedback.id > 0).order_by(Feedback.date).all())
 
 
 @app.route('/feedback_form', methods=['GET', 'POST'])
@@ -48,7 +47,7 @@ def feedback_form_page():
             return render_template('feedback_form.html', edit=edit, old_feedback=old_feedback)
         if edit:
             if text.split() == []:
-                Feedback.query.filter(user.id == user.feedbacks[0].user_id).delete()
+                Feedback.query.filter_by(user_id=user.id).delete()
             else:
                 user.feedbacks[0].text = text
         else:
