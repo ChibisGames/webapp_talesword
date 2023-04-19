@@ -1,12 +1,9 @@
-from flask import request, redirect, render_template, url_for, flash
+from flask import request, redirect, render_template, url_for, flash, session
 from flask_login import login_user, login_required, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from webapp import app, db
 from webapp.models import Feedback, User
-
-
-personal_log = 'qwe'
 
 
 @app.route('/update', methods=['GET'])
@@ -27,7 +24,10 @@ def feedbacks_page():
 @login_required
 def feedback_form_page():
     edit = False
-    user = User.query.filter(User.login == personal_log).first()
+    if 'user' in session:
+        user = User.query.filter(User.login == session['user']).first()
+    else:
+        return redirect(url_for('logout_page'))
     try:
         if user.feedbacks:
             edit = True
@@ -58,9 +58,7 @@ def login_page():
             login_user(user)
 
             #  next_page = request.args.get('next')
-
-            global personal_log
-            personal_log = login
+            session['user'] = login
 
             redirect(url_for('feedback_form_page'))
         else:
@@ -88,6 +86,7 @@ def register_page():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
+            session['user'] = new_user.login
             return redirect(url_for('feedback_form_page'))
 
         return redirect(url_for('login_page'))
