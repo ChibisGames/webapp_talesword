@@ -6,8 +6,8 @@ Talesword: Написание отзыва
 
 
 {% block body %}
-<h1>Login Page</h1>
-<div class="centered">
+<h1>Вход</h1>
+<div class="container">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul class=flashes>
@@ -18,17 +18,17 @@ Talesword: Написание отзыва
         {% endif %}
     {% endwith %}
     <form method="POST">
-        <table>
+        <table class="text-center">
             <tr>
-                <td>Login</td>
+                <td>Логин</td>
                 <td><input type="text" name="login"></td>
             </tr>
             <tr>
-                <td>Password</td>
+                <td>Пароль</td>
                 <td><input type="password" name="password"></td>        </tr>
             <tr>
-                <td><a href="{{ url_for('register_page') }}">Register</a></td>
-                <td><input type="submit" value="Login"></td>
+                <td><a href="{{ url_for('register_page') }}">Регистрация>></a></td>
+                <td><input type="submit" value="Вход"></td>
             </tr>
         </table>
     </form>

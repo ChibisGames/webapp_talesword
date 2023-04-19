@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Registr Page</h1>
+{% extends 'base.html' %}
+
+{% block title %}
+Talesword: Написание отзыва
+{% endblock %}
+
+
+{% block body %}
+<h1>Регистрация</h1>
+
+<p>Логин не меньше 8 символов, но не больше 64.</p>
+<p>Пароль не меньше 8 символов, но не больше 64.</p>
+<p>Логин и пароль не должны содержать пробелов.</p>
 
 {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -20,21 +25,20 @@
 <form method="POST">
     <table>
         <tr>
-            <td>Login</td>
+            <td>Логин</td>
             <td><input type="text" name="login"></td>
         </tr>
         <tr>
-            <td>Password</td>
+            <td>Пароль</td>
             <td><input type="password" name="password"></td>        </tr>
         <tr>
-            <td>Retype Password</td>
+            <td>Повторите пароль</td>
             <td><input type="password" name="password2"></td>        </tr>
         <tr>
         <tr>
-        <td><a href="{{ url_for('login_page') }}">Login</a>></td>
-            <td><input type="submit" value="Register"></td>
+        <td><a href="{{ url_for('login_page') }}">Вход>></a></td>
+            <td><input type="submit" value="Регистрация"></td>
         </tr>
     </table>
 </form>
-</body>
-</html>
+{% endblock %}

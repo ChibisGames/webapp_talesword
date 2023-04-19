@@ -6,8 +6,17 @@ Talesword: Написание отзыва
 
 {% block body %}
 <form method="post">
+	{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 	{% if edit %}
-		<textarea name="text" class="form-control" placeholder="Введите отзыв"></textarea><br>
+		<textarea name="text" class="form-control" placeholder="Введите отзыв">{{ old_feedback }}</textarea><br>
 		<input type="submit" class="btn btn-success" name="edit_btn" value="Изменить">
 	{% else %}
 		<textarea name="text" class="form-control" placeholder="Введите отзыв"></textarea><br>

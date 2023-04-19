@@ -13,7 +13,7 @@ Talesword: Отзывы
 	{% if item.feedbacks[0] %}
         <div>
         	<h4>Пользователь {{ item.login }}</h4>
-			{{ item.feedbacks[0].text }}
+			<p> {{ item.feedbacks[0].text }} </p>
         </div>
 	{% endif %}
 {% endfor %}
